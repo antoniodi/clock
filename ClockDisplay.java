@@ -24,9 +24,11 @@ public class ClockDisplay
      */
     public ClockDisplay()
     {
-        hours = new NumberDisplay(24);
-        minutes = new NumberDisplay(60);
+        hours = new NumberDisplay(24,"horas");
+        hours.setDia("a.m");
+        minutes = new NumberDisplay(60,"minutos");
         updateDisplay();
+        
     }
 
     /**
@@ -36,8 +38,8 @@ public class ClockDisplay
      */
     public ClockDisplay(int hour, int minute)
     {
-        hours = new NumberDisplay(24);
-        minutes = new NumberDisplay(60);
+        hours = new NumberDisplay(24,"horas");
+        minutes = new NumberDisplay(60,"minutos");
         setTime(hour, minute);
     }
 
@@ -79,6 +81,6 @@ public class ClockDisplay
     private void updateDisplay()
     {
         displayString = hours.getDisplayValue() + ":" + 
-                        minutes.getDisplayValue();
+                        minutes.getDisplayValue()+" "+hours.getDia();
     }
 }

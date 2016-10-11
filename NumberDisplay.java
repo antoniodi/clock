@@ -14,17 +14,20 @@ public class NumberDisplay
 {
     private int limit;
     private int value;
+    private String dia;
+    private String nombre;
 
-    /**
+   
+     /**
      * Constructor for objects of class NumberDisplay.
      * Set the limit at which the display rolls over.
      */
-    public NumberDisplay(int rollOverLimit)
+    public NumberDisplay(int rollOverLimit, String nombre)
     {
+        this.nombre=nombre;
         limit = rollOverLimit;
         value = 0;
     }
-
     /**
      * Return the current value.
      */
@@ -32,7 +35,12 @@ public class NumberDisplay
     {
         return value;
     }
-
+    public String getDia(){
+        return dia;
+    }
+    public void setDia(String dia){
+         this.dia=dia;
+    }
     /**
      * Return the display value (that is, the current value as a two-digit
      * String. If the value is less than ten, it will be padded with a leading
@@ -55,7 +63,16 @@ public class NumberDisplay
     public void setValue(int replacementValue)
     {
         if((replacementValue >= 0) && (replacementValue < limit)) {
-            value = replacementValue;
+            if(nombre.equals("horas")){
+                if(replacementValue<=12){
+                    value = replacementValue;
+                    dia="a.m";
+                }else{
+                    value = replacementValue-12;
+                    dia="p.m";
+                }
+            }else{
+            value = replacementValue;}
         }
     }
 
@@ -64,7 +81,25 @@ public class NumberDisplay
      * limit is reached.
      */
     public void increment()
-    {
-        value = (value + 1) % limit;
+    {   
+        if(limit == 24){
+            value = (value + 1) % (limit/2);
+            if(value==0){
+                value=12;
+                if(dia.equals("a.m")){
+                    dia="p.m";
+                   System.out.println(); 
+                   System.out.println("hola1");
+                }else{
+                    dia="a.m";
+                   System.out.println("hola"); 
+                }
+               
+            }
+            
+            
+            
+        }else{
+        value = (value + 1) % limit;}
     }
 }
